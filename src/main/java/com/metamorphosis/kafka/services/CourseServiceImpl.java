@@ -19,4 +19,9 @@ public class CourseServiceImpl implements  CourseService{
     public void readCourse(String course) {
         System.out.println(course);
     }
+
+    @Override
+    public void readCourse(Course course) {
+        System.out.println(course);
+    }
 }

@@ -19,9 +19,8 @@ public class Consumer {
     @Autowired
     CourseService courseService;
 
-    @KafkaListener(topics = orderTopic)
-    public void consumeMessage(String message){
-        log.info("message consumed {}", message);
-
-        courseService.readCourse(message);
+    @KafkaListener(topics = orderTopic, containerFactory = "kafkaListenerContainerFactory")
+    public void consumeMessage(Course course){
+        log.info("message consumed {}", course);
+        courseService.readCourse(course);
     }}

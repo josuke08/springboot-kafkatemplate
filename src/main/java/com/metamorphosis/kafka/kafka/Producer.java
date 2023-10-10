@@ -14,14 +14,14 @@ public class Producer {
     private String orderTopic;
 
     @Autowired
-    KafkaTemplate<String, String> kafkaTemplate;
+    KafkaTemplate<String, Course> kafkaTemplate;
 
 
     public String sendMessage(Course course){
         String courseAsMessage = course.toString();
-        kafkaTemplate.send(orderTopic, courseAsMessage);
+        kafkaTemplate.send(orderTopic, course);
 
-        log.info("course sent {}", courseAsMessage);
+        log.info("course sent {}", course);
 
         return "message sent";
     }

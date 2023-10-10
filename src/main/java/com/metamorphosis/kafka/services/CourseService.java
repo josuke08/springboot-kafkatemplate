@@ -7,4 +7,5 @@ public interface CourseService {
     String sendCourse(Course course);
 
     void readCourse(String course);
+    void readCourse(Course course);
 }
