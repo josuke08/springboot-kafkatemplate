@@ -33,7 +33,7 @@ public class KafkaConsumerConfig {
                 ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
                 JsonDeserializer.class);
         properties.put(JsonDeserializer.TYPE_MAPPINGS,
-                "Course:com.metamorphosis.kafka.entities.Course");
+                "Course:com.metamorphosis.kafka.entities.Course, Teacher:com.metamorphosis.kafka.entities.Teacher");
         return new DefaultKafkaConsumerFactory<>(properties);
     }
 

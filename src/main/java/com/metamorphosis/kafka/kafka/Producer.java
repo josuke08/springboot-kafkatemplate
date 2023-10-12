@@ -1,6 +1,7 @@
 package com.metamorphosis.kafka.kafka;
 
 import com.metamorphosis.kafka.entities.Course;
+import com.metamorphosis.kafka.entities.Teacher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,14 +15,20 @@ public class Producer {
     private String orderTopic;
 
     @Autowired
-    KafkaTemplate<String, Course> kafkaTemplate;
-
+    KafkaTemplate<String, Object> kafkaTemplate;
 
     public String sendMessage(Course course){
-        String courseAsMessage = course.toString();
         kafkaTemplate.send(orderTopic, course);
 
         log.info("course sent {}", course);
+
+        return "message sent";
+    }
+
+    public String sendMessage(Teacher teacher){
+        kafkaTemplate.send(orderTopic, teacher);
+
+        log.info("teacher sent {}", teacher);
 
         return "message sent";
     }

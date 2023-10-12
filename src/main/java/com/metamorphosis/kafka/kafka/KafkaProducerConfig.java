@@ -22,18 +22,18 @@ public class KafkaProducerConfig {
     KafkaProperties kafkaProperties;
 
     @Bean
-    public ProducerFactory<String, Course> producerFactory() {
+    public ProducerFactory<String, Object> producerFactory() {
         Map<String, Object> properties = kafkaProperties.buildProducerProperties();
         properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 "localhost:9092");
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-        //properties.put(JsonSerializer.TYPE_MAPPINGS, "Course:com.metamorphosis.kafka.entities.Course, Course:com.metamorphosis.kafka.entities.Course");
+        properties.put(JsonSerializer.TYPE_MAPPINGS, "Course:com.metamorphosis.kafka.entities.Course, Teacher:com.metamorphosis.kafka.entities.Teacher");
         return new DefaultKafkaProducerFactory<>(properties);
     }
 
     @Bean
-    public KafkaTemplate<String, Course> kafkaTemplate() {
+    public KafkaTemplate<String, Object> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }
